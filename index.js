@@ -1,9 +1,10 @@
+
 // Global Variables
 var winningWord = '';
 var currentRow = 1;
 var guess = '';
 var gamesPlayed = [];
-
+console.log('index.js words', words)
 // Query Selectors
 var inputs = document.querySelectorAll('input');
 var guessButton = document.querySelector('#guess-button');
@@ -21,7 +22,7 @@ var gameOverGuessCount = document.querySelector('#game-over-guesses-count');
 var gameOverGuessGrammar = document.querySelector('#game-over-guesses-plural');
 
 // Event Listeners
-window.addEventListener('load', setGame);
+window.addEventListener('load', getData);
 
 for (var i = 0; i < inputs.length; i++) {
   inputs[i].addEventListener('keyup', function() { moveToNextInput(event) });
@@ -47,7 +48,8 @@ function setGame() {
 }
 
 function getRandomWord() {
-  var randomIndex = Math.floor(Math.random() * 2500);
+  var randomIndex = Math.floor(Math.random() * 2499);
+  console.log('line 52 words', words[randomIndex])
   return words[randomIndex];
 }
 
@@ -117,7 +119,7 @@ function compareGuess() {
   var guessLetters = guess.split('');
 
   for (var i = 0; i < guessLetters.length; i++) {
-
+console.log('line 121 include', winningWord)
     if (winningWord.includes(guessLetters[i]) && winningWord.split('')[i] !== guessLetters[i]) {
       updateBoxColor(i, 'wrong-location');
       updateKeyColor(guessLetters[i], 'wrong-location-key');
@@ -157,6 +159,7 @@ function updateKeyColor(letter, className) {
 }
 
 function checkForWin() {
+  console.log('line 161 guess', guess)
   return guess === winningWord;
 }
 
